@@ -25,7 +25,7 @@ const CartPage: React.FC = () => {
                 <div className="flex items-center space-x-4">
                   <img
                     src={item.image}
-                    alt={item.title}
+                    // alt={item.title}
                     className="h-16 w-16 rounded-md object-cover"
                   />
                   <div>

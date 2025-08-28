@@ -21,9 +21,10 @@ export const useCartMutations = () => {
       price,
       name, 
       image, 
-    }: { productId: number; quantity: number; price: number; name: string; image: string }) => {
-      
-      return Promise.resolve({ productId, quantity, price, name, image });
+      title
+    }: { productId: number; quantity: number; price: number; name: string; image: string ,title:string}) => {
+
+      return Promise.resolve({ productId, quantity, price, name, image, title });
     },
     onSuccess: (data) => {
       // Update local cart state
@@ -31,7 +32,7 @@ export const useCartMutations = () => {
         type: 'ADD_TO_CART',
         payload: {
           ...data,
-          id: Date.now(), // Generate a unique ID
+          id: Date.now(), 
         },
       });
       

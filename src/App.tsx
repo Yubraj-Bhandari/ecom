@@ -55,7 +55,7 @@ function AppShell() {
 function App() {
   return (
     // enable client side routing
-    <Router>
+    <Router basename="/ecom/">
       {/* product ra cart ko state/context app lai diney */}
       <ProductProvider>
         <CartProvider>

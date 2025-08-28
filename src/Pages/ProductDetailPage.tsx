@@ -19,6 +19,7 @@ const ProductDetailPage: React.FC = () => {
         price: product.price,
         name: product.title,
         image: product.thumbnail,
+        title: product.title
       });
       navigate('/cart');
     }

@@ -1,5 +1,7 @@
 //shape of data(products,carts,users) that we recieve from DummyJSON (backend) schema jastai
 
+
+
 //review ma rating , comment , date ,reviewerName ra reviewerEmail hunxa
 export interface Review {
   rating: number;
@@ -37,7 +39,7 @@ export interface User{
     lastName:string;
 }
 export interface CartItem{
-    title: ReactNode;
+  
     title: string | undefined;
     productId:number;
     quantity:number;

@@ -26,6 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         price: product.price,
         name: product.title,
         image: product.thumbnail,
+        title: product.title
       });
     }
   };
