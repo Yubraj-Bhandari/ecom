@@ -95,7 +95,7 @@ const Header = () => {
                 <span className="hidden lg:inline ">Logout</span>
               </Button>
             ) : (
-              <Link to="/login">
+              <Link to="/#">
                 <Button variant="ghost" size="sm" className="text-sm">
                   <User className="h-4 w-4 mr-2" />
                   <span className="hidden lg:inline">Login</span>
