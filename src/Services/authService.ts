@@ -62,6 +62,6 @@ export const getAuthHeader = (): { Authorization?: string } => {
 // Logout helper
 export const logout = () => {
   localStorage.removeItem("token");
-  localStorage.removeItem("refreshToken");
-  window.location.href = "/login"; // Redirect to login page
+  localStorage.removeItem("user");
+  window.location.href = "/ecom/login"; 
 };
