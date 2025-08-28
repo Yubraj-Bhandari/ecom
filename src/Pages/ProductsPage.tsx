@@ -193,7 +193,7 @@ const ProductsPage = () => {
             <Button
               key={i + 1}
               onClick={() => handlePageChange(i + 1)}
-              variant={currentPage === i + 1 ? 'solid' : 'outline'}
+              variant={currentPage === i + 1 ? 'default' : 'outline'}
               className="mx-1"
             >
               {i + 1}
