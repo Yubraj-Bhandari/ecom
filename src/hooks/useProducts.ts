@@ -1,5 +1,3 @@
-//yesma Server ko state , react query ley manage garxa 
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'; //React Query ho hooks (useQuery, useMutation, useQueryClient).
 import { getProducts, getProductsByCategory, getProductById, searchProducts } from '../Services/productService';
 import type { Product } from '../types';

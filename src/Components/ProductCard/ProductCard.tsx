@@ -1,7 +1,7 @@
 //individual product display with add to cart feature
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { Product } from '../../types';
 import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
 import { Button } from '../ui/button';
@@ -15,6 +15,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCartMutations();
+  const navigate = useNavigate();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -27,6 +28,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         name: product.title,
         image: product.thumbnail,
         title: product.title
+      }, {
+        onSuccess: () => {
+          navigate('/cart');
+        }
       });
     }
   };
@@ -46,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <img
               src={product.thumbnail}
               alt={product.title}
-              className="w-full h-30 sm:h-40 md:h-48 object-contain bg-red-100  "
+              className="w-full h-30 sm:h-40 md:h-48 object-contain bg-red-300  "
             />
             <div className="absolute top-2 right-2">
               <Button

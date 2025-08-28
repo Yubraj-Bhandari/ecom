@@ -30,7 +30,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 flex items-center justify-center h-screen w-screen overflow-hidden fixed top-0 left-0">
+    <div className="bg-gradient-to-br from-orange-100 via-pink-100 to-purple-100 flex items-center justify-center h-screen w-screen overflow-hidden fixed top-0 left-0">
       <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-6 items-center px-4 max-h-screen">
         
         {/* Left Side - Login Form */}
@@ -138,7 +138,7 @@ const LoginPage = () => {
       
         <div className="hidden lg:flex items-center justify-center">
           <img 
-            src="/login.png" 
+            src="/ecom/login.png" 
             alt="Login Illustration" 
             className="w-full max-w-sm h-auto object-contain" 
           />

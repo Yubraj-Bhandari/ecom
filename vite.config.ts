@@ -31,6 +31,7 @@ export default defineConfig({
     {
       name: "copy-404",
       closeBundle() {
+        
         copyFileSync(
           path.resolve(__dirname, "dist/index.html"),
           path.resolve(__dirname, "dist/404.html")

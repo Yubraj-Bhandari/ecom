@@ -15,6 +15,8 @@ import {
 } from "../Components/ui/select";
 import { useLocation } from 'react-router-dom';
 
+const PRODUCTS_PER_PAGE = 20;
+
 //define product page functional component
 const ProductsPage = () => {
   const location = useLocation();
@@ -24,18 +26,20 @@ const ProductsPage = () => {
   //state to track selected category
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortOrder, setSortOrder] = useState<'none' | 'asc' | 'desc'>('none');
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Reset category when search query changes
   useEffect(() => {
     if (searchQuery) {
       setSelectedCategory('all');
+      setCurrentPage(1);
     }
   }, [searchQuery]);
 
   // Use React Query hooks
-  const allProductsQuery = useProducts(50, 0);
+  const allProductsQuery = useProducts(PRODUCTS_PER_PAGE, (currentPage - 1) * PRODUCTS_PER_PAGE);
   const categoryProductsQuery = useProductsByCategory(selectedCategory);
-  const searchProductsQuery = useSearchProducts(searchQuery, 50, 0);
+  const searchProductsQuery = useSearchProducts(searchQuery, PRODUCTS_PER_PAGE, (currentPage - 1) * PRODUCTS_PER_PAGE);
 
   // Determine which query to use based on selected category or search query
   let activeQuery;
@@ -54,16 +58,20 @@ const ProductsPage = () => {
 
   // Extract products array from the query response
   let products: Product[] | undefined;
+  let totalProducts = 0;
 
   if (isSearchQuery || (!isSearchQuery && !isCategoryQuery)) {
     products = (productsData as ProductsResponse)?.products;
+    totalProducts = (productsData as ProductsResponse)?.total || 0;
   } else if (isCategoryQuery) {
     products = productsData as Product[];
+    totalProducts = products?.length || 0;
   }
 
   //handler function to update category
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
+    setCurrentPage(1);
   };
 
   const handleSortChange = (value: 'none' | 'asc' | 'desc') => {
@@ -77,6 +85,12 @@ const ProductsPage = () => {
       products = [...products].sort((a, b) => b.price - a.price);
     }
   }
+
+  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
 //loading state
   if (isLoading) {
@@ -132,7 +146,7 @@ const ProductsPage = () => {
  {/* Info bar: product count + sort button */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
         <p className="text-sm sm:text-base text-gray-600">
-          Showing {products?.length || 0} products
+          Showing {products?.length || 0} of {totalProducts} products
           {selectedCategory !== 'all' && ` in ${selectedCategory}`}
           {isSearchQuery && ` for "${searchQuery}"`}
         </p>
@@ -161,6 +175,38 @@ const ProductsPage = () => {
           {products.map((product: Product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-8">
+          <Button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            variant="outline"
+            className="mr-2"
+          >
+            Previous
+          </Button>
+          {[...Array(totalPages)].map((_, i) => (
+            <Button
+              key={i + 1}
+              onClick={() => handlePageChange(i + 1)}
+              variant={currentPage === i + 1 ? 'solid' : 'outline'}
+              className="mx-1"
+            >
+              {i + 1}
+            </Button>
+          ))}
+          <Button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            variant="outline"
+            className="ml-2"
+          >
+            Next
+          </Button>
         </div>
       )}
     </div>

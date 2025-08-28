@@ -48,7 +48,7 @@ const ProductDetailPage: React.FC = () => {
             <img
               src={selectedImage || product.thumbnail}
               alt={product.title}
-              className="w-full h-auto object-contain rounded-lg shadow-lg bg-red-100"
+              className="w-full h-auto object-contain rounded-lg shadow-lg bg-red-300"
               style={{ maxHeight: '500px' }}
             />
           </div>

@@ -43,7 +43,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-xl sm:text-2xl font-bold text-slate-800 hover:text-blue-700 transition-colors ">
+            <Link to="/" className="text-xl sm:text-2xl font-bold text-slate-800 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-600 hover:bg-clip-text hover:text-transparent transition-colors">
               EcomStore
             </Link>
           </div>
